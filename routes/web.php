@@ -6,7 +6,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TransactionController;
 
-Route::get('/', [LoginController::class, 'index']);
+Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login.post');
 
 Route::middleware('auth')->group(function () {
