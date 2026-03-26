@@ -24,7 +24,19 @@ class LoginController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'No account with email found.'
+            'email' => 'The provided credential does not match our records.'
         ])->onlyInput('email');
+    }
+
+    public function logout(Request $request) {
+        Auth::logout();
+
+        // Invalidate user session
+        $request->session()->invalidate();
+
+        // Regenerate CSRF Token
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login');
     }
 }

@@ -1,7 +1,9 @@
 @include('layouts.header')
 
 <body>
-@include('layouts.navbar')
+@auth
+    @include('layouts.navbar')
+@endauth
 <main class="">
     @yield('content')
 </main>
