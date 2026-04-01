@@ -16,17 +16,17 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            UserSeeder::class,
+            MedicalConditionSeeder::class,
             /* 
 
                 NEED TO CREATE A MIGRATION
 
             */
-            ProcedureSeeder::class,
-            ToothNumberingSeeder::class,
-            DentistSeeder::class,
-            PatientSeeder::class,
-            MedicalQuestionSeeder::class,
-            MedicalConditionSeeder::class
+            // ProcedureSeeder::class,
+            // ToothNumberingSeeder::class,
+            // DentistSeeder::class,
+            // PatientSeeder::class
         ]);
     }
 }

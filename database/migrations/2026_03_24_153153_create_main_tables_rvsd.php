@@ -13,56 +13,58 @@ return new class extends Migration
     {
         Schema::create('patients', function (Blueprint $table) {
             $table->id('patient_id');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->date('date_of_birth');
-            $table->enum('sex', ['Male', 'Female']);
+            $table->string('full_name');
             $table->text('address');
-            $table->string('contact_number');
+            $table->string('contact_no');
+            $table->date('date_of_birth');
             $table->string('occupation');
-            $table->enum('marital_status', ['Single', 'Married', 'Widowed', 'Separated']);
+            $table->string('marital_status');
             $table->string('guardian_name')->nullable();
+            $table->string('sex');
             $table->timestamps();
             $table->softDeletes();
         });
 
         Schema::create('dentists', function (Blueprint $table) {
             $table->id('dentist_id');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('license_number');
-            $table->string('specialization');
+            $table->string('full_name');
+            $table->string('license_no'); 
+            $table->timestamps();
+        });
+ 
+        Schema::create('appointments', function (Blueprint $table) {
+            $table->id('appointment_id');
+            $table->foreignId('patient_id')->constrained('patients', 'patient_id');
+            $table->foreignId('dentist_id')->constrained('dentists', 'dentist_id');
+            $table->dateTime('scheduled_at');
+            $table->string('status');
             $table->timestamps();
         });
         
         Schema::create('dental_procedures', function (Blueprint $table) {
             $table->id('procedure_id');
             $table->string('name');
-            $table->decimal('min_price', 10, 2);
-            $table->text('notes')->nullable();
+            $table->decimal('base_price', 10, 2);
             $table->timestamps();
         });
 
-        Schema::create('tooth_numbering', function (Blueprint $table) {
-            $table->tinyInteger('tooth_id')->unsigned();
-            $table->enum('type', ['Permanent', 'Temporary']);
-            $table->enum('quadrant', ['Upper Right', 'Upper Left', 'Lower Right', 'Lower Left']);
-            $table->tinyInteger('position')->unsigned();
+        Schema::create('dental_certificates', function (Blueprint $table) {
+            $table->id('issuance_id');
+            $table->foreignId('appointment_id')->constrained('appointments', 'appointment_id');
+            $table->text('recommendations');
+            $table->dateTime('issued_at');
             $table->timestamps();
         });
 
-        Schema::create('medical_conditions', function (Blueprint $table) {
-            $table->id('condition_id');
-            $table->string('condition_name');
+        Schema::create('transaction_ledger', function (Blueprint $table) {
+            $table->id('entry_id');
+            $table->foreignId('appointment_id')->nullable()->constrained('appointments', 'appointment_id');
+            $table->date('entry_date');
+            $table->text('description');
+            $table->decimal('debit', 10, 2)->default(0);
+            $table->decimal('credit', 10, 2)->default(0);
             $table->timestamps();
         });
-
-        Schema::create('medical_questions', function (Blueprint $table) {
-            $table->id('question_id');
-            $table->string('question');
-            $table->timestamps();
-        });
-
     }
 
     /**
@@ -70,11 +72,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('patients');
-        Schema::dropIfExists('dentists');
+        Schema::dropIfExists('transaction_ledger');
+        Schema::dropIfExists('dental_certificates');
         Schema::dropIfExists('dental_procedures');
-        Schema::dropIfExists('medical_conditions');
-        Schema::dropIfExists('medical_questions');
-        Schema::dropIfExists('tooth_numbering');
+        Schema::dropIfExists('appointments');
+        Schema::dropIfExists('dentists');
+        Schema::dropIfExists('patients');
     }
 };
