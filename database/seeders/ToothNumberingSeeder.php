@@ -35,7 +35,7 @@ class ToothNumberingSeeder extends Seeder
             foreach (range(1, 8) as $position) {
                 $teeth[] = [
                     'tooth_id'   => ($quadrant * 10) + $position,
-                    'type'       => 'permanent',
+                    'type'       => 'Permanent',
                     'quadrant'   => $quadrants[$quadrant],
                     'position'   => $position,
                 ];
@@ -46,7 +46,7 @@ class ToothNumberingSeeder extends Seeder
             foreach (range(1, 5) as $position) {
                 $teeth[] = [
                     'tooth_id'   => ($quadrant * 10) + $position,
-                    'type'       => 'temporary',
+                    'type'       => 'Temporary',
                     'quadrant'   => $quadrants[$quadrant],
                     'position'   => $position,
                 ];
@@ -57,6 +57,6 @@ class ToothNumberingSeeder extends Seeder
             NEED TO CREATE A MIGRATION
 
         */
-        DB::table(/*table*/)->insert($teeth);
+        DB::table('tooth_numbering')->insert($teeth);
     }
 }
