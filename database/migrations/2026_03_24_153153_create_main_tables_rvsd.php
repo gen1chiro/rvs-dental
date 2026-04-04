@@ -55,16 +55,6 @@ return new class extends Migration
             $table->dateTime('issued_at');
             $table->timestamps();
         });
-
-        Schema::create('transaction_ledger', function (Blueprint $table) {
-            $table->id('entry_id');
-            $table->foreignId('appointment_id')->nullable()->constrained('appointments', 'appointment_id');
-            $table->date('entry_date');
-            $table->text('description');
-            $table->decimal('debit', 10, 2)->default(0);
-            $table->decimal('credit', 10, 2)->default(0);
-            $table->timestamps();
-        });
     }
 
     /**
