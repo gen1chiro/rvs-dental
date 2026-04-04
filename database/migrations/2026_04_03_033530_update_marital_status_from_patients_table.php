@@ -17,8 +17,9 @@ return new class extends Migration
 
         Schema::table('patients', function (Blueprint $table) {
             $table->string('image_filename')
+                ->nullable()
                 ->after('last_name')
-                ->default('default-patient.jpg');
+                ->default(null);
         });
     }
 

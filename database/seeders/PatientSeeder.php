@@ -17,7 +17,7 @@ class PatientSeeder extends Seeder
             [
                 'first_name'     => 'Mark',
                 'last_name'      => 'Lopez',
-                'image_filename' => 'default-patient.jpg',
+                'image_filename' => null,
                 'date_of_birth'  => '1992-04-12',
                 'sex'            => 'Male',
                 'address'        => 'Bacolod City, Negros Occidental',
@@ -87,7 +87,7 @@ class PatientSeeder extends Seeder
             [
                 'first_name'     => 'Jessa',
                 'last_name'      => 'Villanueva',
-                'image_filename' => 'default-patient.jpg',
+                'image_filename' => null,
                 'date_of_birth'  => '2000-05-20',
                 'sex'            => 'Female',
                 'address'        => 'Bacolod City, Negros Occidental',
@@ -143,7 +143,7 @@ class PatientSeeder extends Seeder
             [
                 'first_name'     => 'Anna',
                 'last_name'      => 'Ramos',
-                'image_filename' => 'default-patient.jpg',
+                'image_filename' => null,
                 'date_of_birth'  => '1991-03-27',
                 'sex'            => 'Female',
                 'address'        => 'Bacolod City, Negros Occidental',
@@ -157,7 +157,7 @@ class PatientSeeder extends Seeder
             [
                 'first_name'     => 'Bryan',
                 'last_name'      => 'Flores',
-                'image_filename' => 'default-patient.jpg',
+                'image_filename' => null,
                 'date_of_birth'  => '1994-10-10',
                 'sex'            => 'Male',
                 'address'        => 'Bacolod City, Negros Occidental',
@@ -199,7 +199,7 @@ class PatientSeeder extends Seeder
             [
                 'first_name'     => 'Joy',
                 'last_name'      => 'Cruz',
-                'image_filename' => 'default-patient.jpg',
+                'image_filename' => null,
                 'date_of_birth'  => '2002-01-19',
                 'sex'            => 'Female',
                 'address'        => 'Bacolod City, Negros Occidental',
@@ -269,7 +269,7 @@ class PatientSeeder extends Seeder
             [
                 'first_name'     => 'Oscar',
                 'last_name'      => 'Pineda',
-                'image_filename' => 'default-patient.jpg',
+                'image_filename' => null,
                 'date_of_birth'  => '1979-11-11',
                 'sex'            => 'Male',
                 'address'        => 'Bacolod City, Negros Occidental',
