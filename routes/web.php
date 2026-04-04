@@ -10,8 +10,8 @@ Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/', [LoginController::class, 'authenticate'])->name('login.post');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/appointments', [AppointmentController::class, 'index'])->name('appointments.index');
-    Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
-    Route::get('/patients', [PatientController::class, 'index'])->name('patients.index');
+    Route::resource('appointments', AppointmentController::class);
+    Route::resource('transactions',TransactionController::class);
+    Route::resource('patients', PatientController::class);
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
