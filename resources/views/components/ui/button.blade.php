@@ -10,6 +10,7 @@
         'primary' => 'bg-primary border-tertiary text-white hover:bg-primary/90 focus:ring-primary',
         'secondary' => 'bg-secondary border-tertiary text-primary hover:bg-secondary/90 focus:ring-secondary',
         'danger' => 'bg-danger-muted border-danger text-black hover:bg-red-100 focus:ring-red-400',
+        'outline' => 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50 focus:ring-gray-200',
     };
 @endphp
 

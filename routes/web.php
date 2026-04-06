@@ -9,6 +9,8 @@ use App\Http\Controllers\TransactionController;
 Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/', [LoginController::class, 'authenticate'])->name('login.post');
 
+Route::get('/appointments/{id}', [AppointmentController::class, 'show']);
+
 Route::middleware('auth')->group(function () {
     Route::resource('appointments', AppointmentController::class);
     Route::resource('transactions',TransactionController::class);
