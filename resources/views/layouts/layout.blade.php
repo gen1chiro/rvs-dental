@@ -2,7 +2,10 @@
 
 <body class="h-dvh flex flex-col">
 @auth
-    @include('layouts.navbar')
+    @hasSection('hideNavbar')
+    @else
+        @include('layouts.navbar')
+    @endif
 @endauth
 
 <main class="flex-1 flex flex-col min-h-0">

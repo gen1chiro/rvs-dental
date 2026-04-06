@@ -1,8 +1,5 @@
 @props([
-    'type' => 'text',
-    'name' => 'input',
-    'value' => '',
-    'placeholder' => '',
+    'name' => 'select',
     'variant' => '',
 ])
 
@@ -15,10 +12,9 @@
     };
 @endphp
 
-<input
-    type="{{ $type }}"
+<select
     name="{{ $name }}"
-    value="{{ $value }}"
-    placeholder="{{ $placeholder }}"
     {{ $attributes->merge(['class' => "$baseClasses $variantClasses"]) }}
-/>
+>
+    {{ $slot }}
+</select>
