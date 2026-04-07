@@ -16,7 +16,7 @@ class PatientSeeder extends Seeder
         DB::table('patients')->insert([
             [
                 'first_name'     => 'Mark',
-                'last_name'      => 'Lopez',
+                'last_name'      => 'Lopez', // kagago hwqhahhahahahahah
                 'image_filename' => null,
                 'date_of_birth'  => '1992-04-12',
                 'sex'            => 'Male',
