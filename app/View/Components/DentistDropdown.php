@@ -23,6 +23,11 @@ class DentistDropdown extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.ui.dentist-dropdown');
+        return view('components.ui.dentist-dropdown', [
+            'fieldName' => $this->fieldName,
+            'selected'  => $this->selected,
+            'isRequired' => $this->isRequired,
+            'dentists'  => $this->dentists,
+        ]);
     }
 }

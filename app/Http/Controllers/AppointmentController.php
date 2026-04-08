@@ -80,7 +80,10 @@ class AppointmentController extends Controller
     }
 
     public function store(StoreAppointmentRequest $request) {
+        Appointment::create($request->validated());
 
+        return redirect()->route('appointments.index')
+            ->with('success', 'Appointment created successfully.');
     }
 
     public function edit() {
