@@ -4,7 +4,7 @@
     <div id="appointment-view-container"
          data-url="{{ route('appointments.index') }}"
          data-calendar-url="{{ url('appointments/calendar/data') }}"
-         class="w-full h-full p-2 md:p-4 flex gap-4 overflow-hidden relative">
+         class="w-full h-full px-2 pb-2 md:px-4 md:pb-4 flex gap-4 overflow-hidden relative">
 
         <!-- Main Panel (List or Calendar) -->
         <div id="list-panel"

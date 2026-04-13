@@ -10,7 +10,8 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
                 'resources/js/nav.js',
-                'resources/js/appointments/index.js'
+                'resources/js/appointments/index.js',
+                'resources/js/transactions/index.js'
             ],
             refresh: true,
         }),

@@ -17,6 +17,8 @@ class Appointment extends Model
         'remarks'
     ];
 
+    // --- Relationships ---
+
     public function patient()
     {
         return $this->belongsTo(Patient::class, 'patient_id');
@@ -34,8 +36,34 @@ class Appointment extends Model
             ->withTimestamps();
     }
 
+    // --- Accessors ---
+
     public function getProcedureTypeAttribute()
     {
         return $this->procedures->first()?->name ?? 'N/A';
+    }
+
+    // --- Scopes ---
+
+    public function scopeSearchByPatient($query, $search)
+    {
+        if (!$search) {
+            return $query;
+        }
+
+        return $query->whereHas('patient', function ($q) use ($search) {
+            $q->where('first_name', 'like', "%{$search}%")
+                ->orWhere('last_name', 'like', "%{$search}%")
+                ->orWhereRaw("CONCAT(first_name, ' ', last_name) LIKE ?", ["%{$search}%"]);
+        });
+    }
+
+    public function scopeFilterByDate($query, $date)
+    {
+        if (!$date) {
+            return $query;
+        }
+
+        return $query->whereDate('scheduled_at', $date);
     }
 }

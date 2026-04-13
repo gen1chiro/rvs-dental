@@ -10,7 +10,7 @@ window.showAppointmentDetail = async (id) => {
 
     // Open panel
     detailPanel.classList.remove('w-0', 'opacity-0');
-    detailPanel.classList.add('w-full', 'md:w-96', 'opacity-100');
+    detailPanel.classList.add('w-full', 'md:w-5/12', 'lg:w-4/12', 'opacity-100');
 
     try {
         const response = await fetch(`${baseUrl}/${id}`, {
@@ -65,14 +65,17 @@ window.showAppointmentDetail = async (id) => {
 
                 <div class="px-6 py-6 border-t border-edge mt-auto">
                     <div class="flex gap-4 items-center">
-                        <div class="w-16 h-16 md:w-20 md:h-20 bg-white border border-edge shrink-0"></div>
+                        <img
+                            src="${data.patient_image_url}"
+                            alt="Image of ${data.patient_name}"
+                            class="w-16 h-16 md:w-20 md:h-20 bg-white border border-edge shrink-0 object-cover"
+                        >
                         <div class="flex-1 min-w-0">
                             <h3 class="text-lg font-bold text-gray-900 truncate">${data.patient_name}</h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-1 mt-1 text-[11px] text-gray-600">
                                 <p class="truncate"><span class="font-semibold text-gray-900">Age:</span> ${data.age || '20'} y.o.</p>
                                 <p class="truncate"><span class="font-semibold text-gray-900">P:</span> ${data.phone || '+65 123 456 7890'}</p>
                                 <p class="truncate"><span class="font-semibold text-gray-900">DOB:</span> ${data.dob || 'May/14/2005'}</p>
-                                <p class="truncate"><span class="font-semibold text-gray-900">Email:</span> ${data.email || 'psbenco@gmail.com'}</p>
                             </div>
                         </div>
                     </div>
@@ -86,7 +89,7 @@ window.showAppointmentDetail = async (id) => {
 
         const closeDetail = () => {
             detailPanel.classList.add('w-0', 'opacity-0');
-            detailPanel.classList.remove('w-full', 'md:w-96', 'opacity-100');
+            detailPanel.classList.remove('w-full', 'md:w-5/12', 'lg:w-4/12', 'opacity-100');
         };
 
         document.getElementById('close-detail').addEventListener('click', closeDetail);
