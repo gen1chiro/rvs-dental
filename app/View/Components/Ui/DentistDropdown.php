@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Ui;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -11,11 +11,11 @@ class DentistDropdown extends Component
 {
     public $dentists;
     public function __construct(
-        public string $fieldName = 'dentist_id',
+        public string $fieldName = "dentist_id",
         public ?int $selected = null,
         public bool $isRequired = false,
     ){
-        $this->dentists = Dentist::orderBy('full_name')->get();
+        $this->dentists = Dentist::select(['dentist_id', 'first_name', 'last_name'])->orderBy('last_name')->get();
     }
 
     /**
@@ -23,11 +23,6 @@ class DentistDropdown extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.ui.dentist-dropdown', [
-            'fieldName' => $this->fieldName,
-            'selected'  => $this->selected,
-            'isRequired' => $this->isRequired,
-            'dentists'  => $this->dentists,
-        ]);
+        return view('components.dentist-dropdown');
     }
 }

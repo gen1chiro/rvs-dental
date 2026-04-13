@@ -17,16 +17,26 @@
         </div>
     @endif
 
-    <x-ui.dentist-dropdown :selected="old('dentist_id', $appointment->dentist_id)" />
-    
+    <div class="flex gap-2 items-center">
+        <input type="text" name="patient_name" id="patient_name">
+        <a href="">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="10.5" cy="10.5" r="7.5"/>
+            <path d="M21 21l-5.2-5.2"/>
+            </svg>
+        </a>
+    </div>
+
+    <x-ui.dentist-dropdown />
+
     <div class="flex flex-col gap-1 w-full md:flex-1">
-        <label for="scheduled_at" class="font-bold text-sm md:text-base">Enter Schedule Slot</label>
+        <label for="scheduled_at" class="font-bold text-sm md:text-base">Appointment Date</label>
         <x-forms.input
-            type="datetime-local"
+            type="date"
             name="scheduled_at"
             id="scheduled_at"
-            min="{{ now()->format('Y-m-d\TH:i') }}"
-            value="{{ old('scheduled_at', $appointment->scheduled_at?->format('Y-m-d\TH:i')) }}"
+            min="{{ now()->format('Y-m-d') }}"
+            value="{{ old('scheduled_at', $appointment->scheduled_at?->format('Y-m-d')) }}"
             required
             variant="form"
             class="w-full"
@@ -47,9 +57,12 @@
         </x-forms.select>
     </div>
 
-    <textarea name="remarks" id="remarks" placeholder="Enter remarks here">
-        {{ old('remarks', $appointment->remarks) }}
-    </textarea>
+    <div class="flex flex-col gap-1 w-full md:flex-1">
+        <label for="status" class="font-bold text-sm md:text-base">Additional Remarks</label>
+        <textarea name="remarks" id="remarks" placeholder="Enter remarks here">
+            {{ old('remarks', $appointment->remarks) }}
+        </textarea>
+    </div>
 
     <x-ui.button 
         type="submit" 

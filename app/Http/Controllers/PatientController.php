@@ -70,4 +70,8 @@ class PatientController extends Controller
             ->route('patients.index')
             ->with('success', 'Patient removed successfully.');
     }
+
+    public function certificate() {
+        return view('components.templates.certificate');
+    }
 }
