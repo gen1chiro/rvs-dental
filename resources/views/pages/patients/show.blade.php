@@ -62,7 +62,7 @@
         </div>
         <div class="h-content md:h-full col-span-12 md:col-span-7 lg:col-span-8 flex gap-4 overflow-auto">
             <x-patients.tab-nav />
-            <div id="tab-content" class="flex-1 border border-border rounded-xl font-sans">
+            <div id="tab-content" class="flex-1 h-full border border-border rounded-xl font-sans">
                 @include('pages.patients.partials.medical-history')
                 @include('pages.patients.partials.teeth-chart')
                 @include('pages.patients.partials.procedures')
