@@ -73,10 +73,6 @@ class PatientController extends Controller
             ->with('success', 'Patient removed successfully.');
     }
 
-    public function certificate() {
-        return view('components.templates.certificate');
-    }
-
     public function search(Request $request): JsonResponse {
         $request->validate([
             'query' => 'required|string|min:3|max:100'

@@ -104,6 +104,17 @@ class AppointmentController extends Controller
         return view('components.appointments.calendar-grid', compact('appointments', 'month', 'year'));
     }
 
+    public function generate(Appointment $appointment)
+    {
+        $appointment->load([
+            'patient',
+            'dentist',
+            'appointmentProcedures.dentalProcedure'
+        ]);
+
+        return view('pages.appointments.generate', compact('appointment'));
+    }
+
     public function view(Appointment $appointment) {
         return view('pages.appointments.view', compact('appointment'));
     }

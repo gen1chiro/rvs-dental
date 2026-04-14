@@ -34,6 +34,11 @@ class Appointment extends Model
         return $this->belongsTo(Dentist::class, 'dentist_id');
     }
 
+    public function appointmentProcedures()
+    {
+        return $this->hasMany(AppointmentProcedure::class, 'appointment_id');
+    }
+
     public function procedures()
     {
         return $this->belongsToMany(DentalProcedure::class, 'appointment_procedures', 'appointment_id', 'procedure_id')

@@ -15,6 +15,11 @@ class Dentist extends Model
         'license_no'
     ];
 
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class, 'dentist_id');
+    }
+
     protected $appends = ['full_name'];
     public function getFullNameAttribute(): string {
         return "{$this->first_name} {$this->last_name}";

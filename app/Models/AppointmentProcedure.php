@@ -32,4 +32,9 @@ class AppointmentProcedure extends Model
     {
         return $this->hasMany(Ledger::class, 'appointment_procedure_id');
     }
+    
+    public function dentalProcedure()
+    {
+        return $this->belongsTo(DentalProcedure::class, 'procedure_id');
+    }
 }
