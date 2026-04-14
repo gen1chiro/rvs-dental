@@ -11,6 +11,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/nav.js',
                 'resources/js/appointments/index.js',
+                'resources/js/patients/index.js',
                 'resources/js/transactions/index.js'
             ],
             refresh: true,

@@ -38,6 +38,11 @@ class TransactionController extends Controller
         return view('pages.transactions', compact('transactions'));
     }
 
+    public function create()
+    {
+        return view('pages.transactions.create');
+    }
+
     public function show($id)
     {
         $transaction = Transaction::with([
