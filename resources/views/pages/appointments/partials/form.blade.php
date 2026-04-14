@@ -3,7 +3,7 @@
     <div class="flex justify-between items-end mb-4">
         <h1 class="text-6xl text-gray-900 tracking-tight">Add Appointment</h1>
         <a href="{{ route('appointments.index') }}"
-           class="bg-[#CCE0E0]/50 hover:bg-[#CCE0E0] text-[#0D5F5F] px-6 py-3 rounded-xl text-xs font-mono uppercase tracking-widest transition-colors flex items-center gap-2 border border-[#0D5F5F]/20">
+           class="bg-secondary/50 hover:bg-secondary text-primary px-6 py-3 rounded-xl text-xs font-mono uppercase tracking-widest transition-colors flex items-center gap-2 border border-primary/20">
             Return to Appointment List
         </a>
     </div>
@@ -36,7 +36,7 @@
         <div class="flex items-center gap-8 max-w-6xl w-full">
             <label for="patient_name" class="w-64 font-mono font-bold text-sm text-gray-800 uppercase tracking-tight">Patient</label>
             <div class="flex-1">
-                <x-forms.patient-search />
+                <x-forms.patient-search :patientId="$appointment->patient_id" :patientName="$appointment->patient?->full_name" />
             </div>
         </div>
 

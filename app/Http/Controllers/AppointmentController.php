@@ -72,6 +72,7 @@ class AppointmentController extends Controller
 
     public function edit(Appointment $appointment): View
     {
+        $appointment->load('patient');
         return view('pages.appointments.edit', compact('appointment'));
     }
 
