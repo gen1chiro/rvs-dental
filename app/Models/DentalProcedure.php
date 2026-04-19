@@ -11,6 +11,8 @@ class DentalProcedure extends Model
 
     protected $fillable = [
         'name',
-        'base_price'
+        'min_price',
+        'max_price',
+        'notes'
     ];
 }

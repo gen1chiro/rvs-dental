@@ -5,6 +5,8 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ProcedureController;
+use App\Http\Controllers\AppointmentProcedureController;
 
 Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/', [LoginController::class, 'authenticate'])->name('login.post');
@@ -15,6 +17,7 @@ Route::middleware(['auth', 'role'])->group(function () {
         Route::get('/{appointment}/view', [AppointmentController::class, 'view'])->name('appointments.view');
         Route::post('/{appointment}/upload', [AppointmentController::class, 'uploadProcedureImages'])->name('appointments.upload');
         Route::get('/{appointment}/generate', [AppointmentController::class, 'generate'])->name('appointments.generate');
+        Route::post('/{appointment}/procedures', [AppointmentProcedureController::class, 'store'])->name('appointment.procedure.store');
     });
     
     Route::get('/patients/search', [PatientController::class, 'search'])->name('patients.search');
@@ -22,4 +25,5 @@ Route::middleware(['auth', 'role'])->group(function () {
     Route::resource('transactions', TransactionController::class);
     Route::resource('patients', PatientController::class);
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('/procedures', [ProcedureController::class, 'index']);
 });
