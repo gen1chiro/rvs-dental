@@ -69,7 +69,7 @@
             </div>
         </div>
 
-        <a href="{{ route('appointments.view', $appointment->patient_id) }}" class="w-full mt-6 md:mt-8 bg-primary hover:bg-opacity-90 text-white py-3 md:py-4 px-6 rounded-sm font-bold text-sm flex items-center justify-center gap-2 transition-all">
+        <a href="{{ route('appointments.view', $appointment->appointment_id) }}" class="w-full mt-6 md:mt-8 bg-primary hover:bg-opacity-90 text-white py-3 md:py-4 px-6 rounded-sm font-bold text-sm flex items-center justify-center gap-2 transition-all">
             VIEW APPOINTMENT <span class="text-lg">→</span>
         </a>
     </div>

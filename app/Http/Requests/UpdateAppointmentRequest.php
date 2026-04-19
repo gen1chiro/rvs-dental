@@ -17,8 +17,8 @@ class UpdateAppointmentRequest extends FormRequest
         return [
             'patient_id' => 'sometimes|integer|exists:patients,patient_id',
             'dentist_id' => 'sometimes|integer|exists:dentists,dentist_id',
-            'scheduled_at' => 'sometimes|date|after:now',
-            'status' => 'sometimes|string|in:Scheduled,Complete,Cancelled,No Show',
+            'scheduled_at' => 'sometimes|date',
+            'status' => 'sometimes|string|in:Scheduled,Completed,Cancelled,No Show',
             'remarks' => 'sometimes|string|max:500'
         ];
     }

@@ -82,7 +82,7 @@ class AppointmentController extends Controller
     {
         $appointment->update($request->validated());
 
-        return redirect()->route('pages.appointments.view', $appointment)
+        return redirect()->route('appointments.view', $appointment)
             ->with('success', 'Appointment updated successfully.');
     }
 

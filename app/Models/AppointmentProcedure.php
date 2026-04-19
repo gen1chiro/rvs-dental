@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class AppointmentProcedure extends Model
 {
@@ -23,17 +23,12 @@ class AppointmentProcedure extends Model
         return $this->belongsTo(Appointment::class, 'appointment_id');
     }
 
-    public function procedure(): BelongsTo
+    public function ledgers(): HasOne
     {
-        return $this->belongsTo(DentalProcedure::class, 'procedure_id');
-    }
-
-    public function ledgers(): HasMany
-    {
-        return $this->hasMany(Ledger::class, 'appointment_procedure_id');
+        return $this->hasOne(Ledger::class, 'appointment_procedure_id');
     }
     
-    public function dentalProcedure()
+    public function dentalProcedure(): BelongsTo
     {
         return $this->belongsTo(DentalProcedure::class, 'procedure_id');
     }

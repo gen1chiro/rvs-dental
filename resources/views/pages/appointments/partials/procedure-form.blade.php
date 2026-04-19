@@ -3,7 +3,7 @@
     action="{{ route('appointment.procedure.store', $appointment) }}"
     method="POST"
     class="flex flex-col gap-4 w-2/5"
-    data-appointment-id="{{ $appointment->id }}"
+    data-appointment-id="{{ $appointment->appointment_id }}"
 >
     <div id="procedure-container">
         <div class="flex flex-col">

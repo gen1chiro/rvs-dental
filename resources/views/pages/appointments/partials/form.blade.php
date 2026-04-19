@@ -57,7 +57,7 @@
                         type="date"
                         name="scheduled_at"
                         id="scheduled_at"
-                        min="{{ now()->format('Y-m-d') }}"
+                        min="{{ $mode === 'Add' ? now()->format('Y-m-d') : '' }}"
                         value="{{ old('scheduled_at', $appointment->scheduled_at?->format('Y-m-d')) }}"
                         required
                         variant="form"

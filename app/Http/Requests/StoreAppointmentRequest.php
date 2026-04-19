@@ -20,7 +20,7 @@ class StoreAppointmentRequest extends FormRequest
             'dentist_id' => 'required|integer|exists:dentists,dentist_id',
             'slot' => 'required|in:Morning,Afternoon',
             'scheduled_at' => 'required|date|after:now',
-            'status' => 'required|string|in:Scheduled,Complete,Cancelled,No Show',
+            'status' => 'required|string|in:Scheduled,Completed,Cancelled,No Show',
             'remarks' => 'nullable|string|max:500'
         ];
     }
