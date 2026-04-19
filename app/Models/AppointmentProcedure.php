@@ -15,7 +15,6 @@ class AppointmentProcedure extends Model
         'appointment_id',
         'procedure_id',
         'notes',
-        'charged_price'
     ];
 
     public function appointment(): BelongsTo
@@ -23,7 +22,7 @@ class AppointmentProcedure extends Model
         return $this->belongsTo(Appointment::class, 'appointment_id');
     }
 
-    public function ledgers(): HasOne
+    public function ledger(): HasOne
     {
         return $this->hasOne(Ledger::class, 'appointment_procedure_id');
     }

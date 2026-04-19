@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
             */
             MedicalConditionSeeder::class,
             ProcedureSeeder::class,
-            ToothNumberingSeeder::class,
             DentistSeeder::class,
             PatientSeeder::class,
             MedicalQuestionSeeder::class,

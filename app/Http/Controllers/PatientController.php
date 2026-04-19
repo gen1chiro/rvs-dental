@@ -117,7 +117,23 @@ class PatientController extends Controller
             ->map(fn ($id) => (int) $id)
             ->all();
 
-        return view('pages.patients.show', compact('patient', 'medicalHistoryLastUpdatedAt', 'patientResponses', 'medicalConditions', 'patientConditionIds'));
+        $folders = Appointment::where('patient_id', $patient->patient_id)
+            ->with('procedureFiles')
+            ->orderByDesc('scheduled_at')
+            ->get()
+            ->map(fn($appointment) => [
+                'id' => $appointment->appointment_id,
+                'label' => 'RVS-' . str_pad($appointment->appointment_id, 4, '0', STR_PAD_LEFT),
+                'date' => $appointment->scheduled_at->format('M d, Y'),
+                'slot' => $appointment->slot,
+                'status' => $appointment->status,
+                'files' => $appointment->procedureFiles->map(fn($file) => [
+                    'id' => $file->procedure_file_id,
+                    'name' => $file->file_name,
+                    'url' => Storage::url($file->file_name),
+                ]),
+            ]);
+        return view('pages.patients.show', compact('patient', 'medicalHistoryLastUpdatedAt', 'patientResponses', 'medicalConditions', 'patientConditionIds', 'folders'));
     }
 
     // Show patient edit form

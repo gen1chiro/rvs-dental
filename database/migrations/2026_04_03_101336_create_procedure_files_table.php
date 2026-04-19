@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('procedure_files', function (Blueprint $table) {
             $table->id('procedure_file_id');
-            $table->foreignId('appointment_procedure_id')
-                ->constrained('appointment_procedures', 'appointment_procedure_id')
+            $table->foreignId('appointment_id')
+                ->constrained('appointments', 'appointment_id')
                 ->cascadeOnDelete();
             $table->string('file_name');
             $table->string('file_type')->nullable();

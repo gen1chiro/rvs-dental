@@ -15,7 +15,7 @@ class Patient extends Model
     use SoftDeletes;
     protected $table = 'patients';
     protected $primaryKey = 'patient_id';
-    protected $appends = ['full_name'];
+    protected $appends = ['full_name', 'image_url', 'age'];
     
     protected $fillable = [
         'first_name',

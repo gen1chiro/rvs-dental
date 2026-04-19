@@ -42,7 +42,7 @@ class Appointment extends Model
     public function procedures()
     {
         return $this->belongsToMany(DentalProcedure::class, 'appointment_procedures', 'appointment_id', 'procedure_id')
-            ->withPivot('notes', 'charged_price')
+            ->withPivot('notes')
             ->withTimestamps();
     }
 

@@ -13,7 +13,8 @@ class Ledger extends Model
 
     protected $fillable = [
         'appointment_procedure_id',
-        'description'
+        'description',
+        'charged_price'
     ];
 
     public function appointmentProcedure(): BelongsTo
