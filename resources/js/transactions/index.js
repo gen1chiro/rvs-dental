@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const sortBtn = document.getElementById('transaction-sort-btn');
     const sortIcon = document.getElementById('transaction-sort-icon');
     const dateFilter = document.getElementById('transaction-date-filter');
+    const statusFilter = document.getElementById('transaction-status-filter');
 
     if (!container || !list || !trigger || !detailContainer) return;
 
@@ -43,6 +44,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             if (dateFilter && dateFilter.value) {
                 url.searchParams.set('date', dateFilter.value);
+            }
+            if (statusFilter && statusFilter.value) {
+                url.searchParams.set('status', statusFilter.value);
             }
 
             const response = await fetch(url.toString(), {
@@ -155,6 +159,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Date Filter Logic ---
     if (dateFilter) {
         dateFilter.addEventListener('change', () => updateTransactions(true));
+    }
+
+    // --- Status Filter Logic ---
+    if (statusFilter) {
+        statusFilter.addEventListener('change', () => updateTransactions(true));
     }
 
     // --- Infinite Scroll Logic ---

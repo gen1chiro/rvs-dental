@@ -11,6 +11,7 @@ class TransactionController extends Controller
     {
         $search = $request->input('search');
         $date = $request->input('date');
+        $status = $request->input('status', 'Pending');
         $sort = $request->query('sort', 'desc') === 'asc' ? 'asc' : 'desc';
 
         $query = Transaction::with(['ledger.appointmentProcedure.appointment.patient'])
@@ -26,6 +27,14 @@ class TransactionController extends Controller
 
         if ($date) {
             $query->whereDate('created_at', $date);
+        }
+
+        if ($status && $status !== 'All') {
+            if ($status === 'Pending') {
+                $query->where('running_balance', '>', 0);
+            } elseif ($status === 'Completed') {
+                $query->where('running_balance', '<=', 0);
+            }
         }
 
         $transactions = $query->orderBy('created_at', $sort)->paginate(10);
