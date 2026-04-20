@@ -9,8 +9,10 @@ use App\Http\Controllers\ProcedureController;
 use App\Http\Controllers\AppointmentProcedureController;
 use App\Http\Controllers\ProcedureFileController;
 
-Route::get('/', [LoginController::class, 'index'])->name('login');
-Route::post('/', [LoginController::class, 'authenticate'])->name('login.post');
+Route::middleware('logged_in')->group(function () {
+    Route::get('/', [LoginController::class, 'index'])->name('login');
+    Route::post('/', [LoginController::class, 'authenticate'])->name('login.post');
+});
 
 Route::middleware(['auth', 'role'])->group(function () {
     Route::prefix('/appointments')->group(function () {
@@ -22,9 +24,6 @@ Route::middleware(['auth', 'role'])->group(function () {
         Route::get('/{appointment}/generate', [AppointmentController::class, 'generate'])->name('appointments.generate');
         Route::post('/{appointment}/procedures', [AppointmentProcedureController::class, 'store'])->name('appointment.procedure.store');
         Route::post('/{appointment}/images/upload', [ProcedureFileController::class, 'save'])->name('appointments.images.save');
-    });
-    Route::prefix('/patients')->group(function () {
-        Route::get('/search', [PatientController::class, 'search'])->name('patients.search');
     });
 
     Route::get('/patients/search', [PatientController::class, 'search'])->name('patients.search');
