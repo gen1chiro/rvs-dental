@@ -56,7 +56,7 @@ class TransactionController extends Controller
     {
         $transaction->loadMissing([
             'ledger.appointmentProcedure.appointment.patient',
-            'ledger.appointmentProcedure.procedure'
+            'ledger.appointmentProcedure.dentalProcedure'
         ]);
 
         if (request()->ajax()) {
