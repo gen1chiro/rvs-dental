@@ -13,7 +13,7 @@
                         No transactions found.
                     </div>
                 @endforelse
-                <div id="infinite-scroll-trigger" 
+                <div id="infinite-scroll-trigger"
                      data-has-more="{{ $transactions->hasMorePages() ? '1' : '0' }}"
                      class="py-4 text-center border-t border-border/50">
                     @if($transactions->hasMorePages())
