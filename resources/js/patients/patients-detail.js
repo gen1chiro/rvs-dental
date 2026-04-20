@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="text-xs flex flex-col gap-2">
                         <p>Address: ${address}</p>
                         <p>Occupation: ${occupation}</p>
-                        <p>Parent/Guardian Name: ${guardian_name ?? 'none'}</p>
+                        <p>Parent/Guardian Name: ${guardian_name ?? 'N/A'}</p>
                         <p>Contact No: ${contact_no}</p>
                         <p>Civil Status: ${marital_status}</p>
                     </div>

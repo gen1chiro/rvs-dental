@@ -130,7 +130,7 @@ class PatientController extends Controller
                 'files' => $appointment->procedureFiles->map(fn($file) => [
                     'id' => $file->procedure_file_id,
                     'name' => $file->file_name,
-                    'url' => Storage::url($file->file_name),
+                    'url' => Storage::url("appointments/{$appointment->appointment_id}/{$file->file_name}"),
                 ]),
             ]);
         return view('pages.patients.show', compact('patient', 'medicalHistoryLastUpdatedAt', 'patientResponses', 'medicalConditions', 'patientConditionIds', 'folders'));
