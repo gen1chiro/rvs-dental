@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="w-full h-full px-4 pb-4 grid grid-cols-12 gap-4">
-        <div id="patient-info" class="h-content col-span-12 md:h-full md:col-span-5 lg:col-span-4 font-sans border border-border rounded-xl flex bg-secondary flex-col overflow-hidden">
+        <div id="patient-info" data-patient-id="{{ $patient->patient_id }}" class="h-content col-span-12 md:h-full md:col-span-5 lg:col-span-4 font-sans border border-border rounded-xl flex bg-secondary flex-col overflow-hidden">
             <div class="flex-1 overflow-auto">
                 <p class="font-bold text-3xl p-4 border-b border-border">
                     <span>{{ $patient->first_name }}</span>
@@ -35,21 +35,21 @@
                     <div class="flex gap-8">
                         <div class="flex flex-col gap-4">
                             <div>
-                                <p class="text-2xl font-bold">{date}</p>
+                                <p id="last-appointment-value" class="text-2xl font-bold">Loading...</p>
                                 <p class="text-xs">Last Appointment</p>
                             </div>
                             <div>
-                                <p class="text-2xl font-bold">{date}</p>
+                                <p id="next-appointment-value" class="text-2xl font-bold">Loading...</p>
                                 <p class="text-xs">Next Appointment</p>
                             </div>
                         </div>
                         <div class="flex flex-col gap-4">
                             <div>
-                                <p class="text-2xl font-bold">{amount}</p>
+                                <p id="deficiency-value" class="text-2xl font-bold">Loading...</p>
                                 <p class="text-xs">Deficiency</p>
                             </div>
                             <div>
-                                <p class="text-2xl font-bold">{amount}</p>
+                                <p id="total-payment-value" class="text-2xl font-bold">Loading...</p>
                                 <p class="text-xs">Full Payment</p>
                             </div>
                         </div>

@@ -40,4 +40,51 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    const patientInfo = document.getElementById('patient-info');
+    const patientId = patientInfo?.dataset.patientId;
+
+    if (!patientId) return;
+
+    const lastAppointmentValue = document.getElementById('last-appointment-value');
+    const nextAppointmentValue = document.getElementById('next-appointment-value');
+    const deficiencyValue = document.getElementById('deficiency-value');
+    const totalPaymentValue = document.getElementById('total-payment-value');
+
+    fetch(`/patients/${patientId}/summary`)
+        .then((response) => response.json())
+        .then((summary) => {
+            if (lastAppointmentValue) {
+                lastAppointmentValue.textContent = summary.last_appointment ?? 'N/A';
+            }
+
+            if (nextAppointmentValue) {
+                nextAppointmentValue.textContent = summary.next_appointment ?? 'N/A';
+            }
+
+            if (deficiencyValue) {
+                deficiencyValue.textContent = `₱${Number(summary.deficiency).toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+            }
+
+            if (totalPaymentValue) {
+                totalPaymentValue.textContent = `₱${Number(summary.total_payment).toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+            }
+        })
+        .catch(() => {
+            if (lastAppointmentValue) {
+                lastAppointmentValue.textContent = 'N/A';
+            }
+
+            if (nextAppointmentValue) {
+                nextAppointmentValue.textContent = 'N/A';
+            }
+
+            if (deficiencyValue) {
+                deficiencyValue.textContent = '₱0.00';
+            }
+
+            if (totalPaymentValue) {
+                totalPaymentValue.textContent = '₱0.00';
+            }
+        });
 });
