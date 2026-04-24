@@ -1,5 +1,5 @@
-@props(['transactions'])
+@props(['ledgers'])
 
-@foreach ($transactions as $transaction)
-    <x-transactions.item :transaction="$transaction" />
+@foreach ($ledgers as $ledger)
+    <x-transactions.item :ledger="$ledger" />
 @endforeach

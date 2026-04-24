@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProcedureController;
 use App\Http\Controllers\AppointmentProcedureController;
 use App\Http\Controllers\ProcedureFileController;
+use App\Http\Controllers\DentalCertificateController;
 
 Route::middleware('logged_in')->group(function () {
     Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -35,7 +36,10 @@ Route::middleware(['auth', 'role'])->group(function () {
 
     Route::get('/procedures', [ProcedureController::class, 'index']);
     Route::resource('appointments', AppointmentController::class);
-    Route::resource('transactions', TransactionController::class);
+    Route::resource('transactions', TransactionController::class)->parameters([
+        'transactions' => 'ledger'
+    ]);
     Route::resource('patients', PatientController::class);
+    Route::resource('dental-certificates', DentalCertificateController::class);
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });

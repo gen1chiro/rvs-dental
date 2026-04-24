@@ -24,13 +24,14 @@ class Transaction extends Model
         return $this->belongsTo(Ledger::class, 'ledger_id');
     }
 
-    public function getPatientAttribute()
-    {
-        return $this->ledger?->appointmentProcedure?->appointment?->patient;
-    }
+    // remove comment if by transactions 
+    // public function getPatientAttribute()
+    // {
+    //     return $this->ledger?->appointmentProcedure?->appointment?->patient;
+    // } 
 
-    public function getStatusAttribute()
-    {
-        return $this->ledger?->appointmentProcedure?->appointment?->status ?? 'N/A';
-    }
+    // public function getStatusAttribute()
+    // {
+    //     return $this->ledger?->appointmentProcedure?->appointment?->status ?? 'N/A';
+    // }
 }

@@ -6,17 +6,17 @@
         <div id="transaction-container" data-url="{{ route('transactions.index') }}" class="col-span-12 md:col-span-7 lg:col-span-8 flex flex-col overflow-hidden border border-border rounded-xl bg-white shadow-sm">
             <x-transactions.toolbar />
             <div id="transaction-list" class="flex-1 overflow-y-auto divide-y divide-border/50">
-                @forelse ($transactions as $transaction)
-                    <x-transactions.item :transaction="$transaction" />
+                @forelse ($ledgers as $ledger)
+                    <x-transactions.item :ledger="$ledger" />
                 @empty
                     <div class="p-10 text-center text-muted italic">
                         No transactions found.
                     </div>
                 @endforelse
                 <div id="infinite-scroll-trigger"
-                     data-has-more="{{ $transactions->hasMorePages() ? '1' : '0' }}"
+                     data-has-more="{{ $ledgers->hasMorePages() ? '1' : '0' }}"
                      class="py-4 text-center border-t border-border/50">
-                    @if($transactions->hasMorePages())
+                    @if($ledgers->hasMorePages())
                         <div class="animate-pulse text-muted text-sm">Loading more transactions...</div>
                     @else
                         <span class="text-sm italic text-muted">No more transactions.</span>

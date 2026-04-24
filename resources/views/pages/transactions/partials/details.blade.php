@@ -1,7 +1,9 @@
-@props(['transaction'])
+@props(['ledger'])
 @php
-    /** @var \App\Models\Transaction $transaction */
-    $patient = $transaction->patient;
+    /** @var \App\Models\Ledger $ledger */
+    $patient = $ledger->appointmentProcedure?->appointment?->patient;
+    //butang ko lng di kay para daw transaction man gyapon
+    $transaction = $ledger->latestTransaction;
 @endphp
 
 <div class="flex flex-col h-full w-full bg-secondary bg-opacity-30 overflow-y-auto animate-fade-in-up">
@@ -18,7 +20,7 @@
             </button>
         </div>
         <p class="text-sm md:text-md font-medium text-gray-700 font-mono uppercase tracking-wider">
-            #ID{{ str_pad($transaction->transaction_id, 7, '0', STR_PAD_LEFT) }}
+            #ID{{ str_pad($transaction->ledger_id, 7, '0', STR_PAD_LEFT) }}
         </p>
     </div>
 

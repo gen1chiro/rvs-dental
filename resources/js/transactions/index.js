@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const row = e.target.closest('.transaction-row');
         if (!row) return;
 
-        const transactionId = row.dataset.transactionId;
+        const ledgerId = row.dataset.ledgerId;
         
         list.querySelectorAll('.transaction-row').forEach(r => r.classList.remove('active'));
         row.classList.add('active');
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
         detailContainer.classList.add('items-center', 'justify-center');
         detailContainer.classList.remove('items-start', 'justify-start', 'text-center');
 
-        fetch(`/transactions/${transactionId}`, {
+        fetch(`/transactions/${ledgerId}`, {
             headers: {
                 'X-Requested-With': 'XMLHttpRequest'
             }
