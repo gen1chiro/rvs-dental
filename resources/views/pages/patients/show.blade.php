@@ -36,7 +36,7 @@
                         <div class="flex flex-col gap-4">
                             <div>
                                 <p id="last-appointment-value" class="text-2xl font-bold">Loading...</p>
-                                <p class="text-xs">Last Appointment</p>
+                                <p class="text-xs">Last Completed Appointment</p>
                             </div>
                             <div>
                                 <p id="next-appointment-value" class="text-2xl font-bold">Loading...</p>

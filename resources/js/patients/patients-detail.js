@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="flex flex-col gap-4">
                             <div>
                                 <p class="text-2xl font-bold">${summary.last_appointment}</p>
-                                <p class="text-xs">Last Appointment</p>
+                                <p class="text-xs">Last Completed Appointment</p>
                             </div>
                             <div>
                                 <p class="text-2xl font-bold">${summary.next_appointment}</p>
