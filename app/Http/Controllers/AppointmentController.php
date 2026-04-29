@@ -24,7 +24,7 @@ class AppointmentController extends Controller
         $status = $request->query('status', 'Scheduled');
 
         $rawAppointments = Appointment::with(['patient', 'dentist'])
-            ->whereHas('patient')
+            ->whereHas('patient') // Get appointments with active patients only
             ->searchByPatient($request->query('search'))
             ->filterByDate($request->query('date'))
             ->when($status !== 'All', fn ($q) => $q->where('status', $status))
@@ -100,7 +100,7 @@ class AppointmentController extends Controller
         $year = (int) $request->query('year', now()->year);
 
         $appointments = Appointment::with('patient')
-            ->whereHas('patient')
+            ->whereHas('patient') // Get appointments with active patients only
             ->whereMonth('scheduled_at', $month)
             ->whereYear('scheduled_at', $year)
             ->get()
