@@ -19,14 +19,16 @@
                class="bg-white hover:bg-gray-50 text-gray-700 px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-[10px] sm:text-xs font-mono uppercase tracking-widest transition-colors flex items-center gap-2 border border-gray-300 justify-center">
                 Edit
             </a>
-            <button type="button" id="toggle-upload-btn"
-               class="bg-white hover:bg-gray-50 text-gray-700 px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-[10px] sm:text-xs font-mono uppercase tracking-widest transition-colors flex items-center gap-2 border border-primary/20 justify-center shadow-sm">
-                Add Images
-            </button>
-            <a href="{{ route('appointments.generate', $appointment) }}"
-               class="bg-primary hover:bg-primary/90 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-[10px] sm:text-xs font-mono uppercase tracking-widest transition-colors flex items-center gap-2 justify-center">
-                Certificate
-            </a>
+            @if (auth()->user()->role === 'Dentist')
+                <button type="button" id="toggle-upload-btn"
+                class="bg-white hover:bg-gray-50 text-gray-700 px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-[10px] sm:text-xs font-mono uppercase tracking-widest transition-colors flex items-center gap-2 border border-primary/20 justify-center shadow-sm">
+                    Add Images
+                </button>
+                <a href="{{ route('appointments.generate', $appointment) }}"
+                class="bg-primary hover:bg-primary/90 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-[10px] sm:text-xs font-mono uppercase tracking-widest transition-colors flex items-center gap-2 justify-center">
+                    Certificate
+                </a>
+            @endif
             <a href="{{ route('appointments.medical-form', $appointment) }}"
                class="bg-primary hover:bg-primary/90 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-[10px] sm:text-xs font-mono uppercase tracking-widest transition-colors flex items-center gap-2 justify-center">
                 Medical Form
