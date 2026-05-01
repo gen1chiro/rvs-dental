@@ -36,9 +36,10 @@ Route::middleware(['auth', 'role'])->group(function () {
 
     Route::get('/procedures', [ProcedureController::class, 'index']);
     Route::resource('appointments', AppointmentController::class);
-    Route::resource('transactions', TransactionController::class)->parameters([
-        'transactions' => 'ledger'
-    ]);
+    Route::resource('transactions', TransactionController::class)
+        ->parameters(['transactions' => 'ledger'])
+        ->except(['update']);
+    Route::put('/transactions/{transaction}', [TransactionController::class, 'update']);
     Route::resource('patients', PatientController::class);
     Route::resource('dental-certificates', DentalCertificateController::class);
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

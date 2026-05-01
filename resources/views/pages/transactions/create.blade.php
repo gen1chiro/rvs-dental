@@ -57,8 +57,10 @@
             </div>
         @endif
         @if(session('success'))
-            <div class="mb-4 p-4 rounded-xl bg-green-50 border border-green-200 text-green-700 font-mono text-xs uppercase tracking-widest">
-                {{ session('success') }}
+            <div class="px-2">
+                <div class="p-4 rounded-xl bg-green-50 border border-green-200 text-green-700 font-mono text-xs uppercase tracking-widest">
+                    {{ session('success') }}
+                </div>
             </div>
         @endif
         <div class="flex-1 overflow-y-auto">
