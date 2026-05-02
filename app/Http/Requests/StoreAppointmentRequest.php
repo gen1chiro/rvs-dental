@@ -20,7 +20,7 @@ class StoreAppointmentRequest extends FormRequest
             'dentist_id' => 'required|integer|exists:dentists,dentist_id',
             'slot' => 'required|in:Morning,Afternoon',
             'scheduled_at' => 'required|date|after:now',
-            'status' => 'required|string|in:Scheduled,Completed,Cancelled,No Show',
+            'status' => 'nullable|string|in:Scheduled,Completed,Cancelled,No Show',
             'remarks' => 'nullable|string|max:500'
         ];
     }
@@ -32,9 +32,15 @@ class StoreAppointmentRequest extends FormRequest
             'scheduled_at.required' => 'Please enter a schedule slot.',
             'slot.in'               => 'Invalid slot selection.',
             'scheduled_at.after'    => 'The schedule must be a future date and time.',
-            'status.required'       => 'Please select a status.',
             'status.in'             => 'Invalid status selection.',
             'remarks.max'           => 'Remarks must not exceed 500 characters.',
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        if (!$this->filled('status')) {
+            $this->merge(['status' => 'Scheduled']);
+        }
     }
 }

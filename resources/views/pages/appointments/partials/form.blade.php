@@ -83,22 +83,24 @@
             </div>
         </div>
 
-        {{-- Row: Status --}}
-        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-8 max-w-6xl w-full">
-            <label for="status" class="w-full md:w-64 font-mono font-bold text-sm text-gray-800 uppercase tracking-tight">Status</label>
-            <div class="flex-1">
-                <x-forms.select name="status" id="status" variant="form" class="w-full bg-white border-gray-300 focus:border-primary focus:ring-1 focus:ring-primary rounded-lg">
-                    <option value="" disabled {{ old('status', $appointment->status) ? '' : 'selected' }}>Select Status</option>
-                    @foreach ($status as $option)
-                        <option value="{{ $option }}"
-                            {{ old('status', $appointment->status) === $option ? 'selected' : '' }}
-                        >
-                            {{ $option }}
-                        </option>
-                    @endforeach
-                </x-forms.select>
+        @if ($mode === 'Edit')
+            {{-- Row: Status --}}
+            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-8 max-w-6xl w-full">
+                <label for="status" class="w-full md:w-64 font-mono font-bold text-sm text-gray-800 uppercase tracking-tight">Status</label>
+                <div class="flex-1">
+                    <x-forms.select name="status" id="status" variant="form" class="w-full bg-white border-gray-300 focus:border-primary focus:ring-1 focus:ring-primary rounded-lg">
+                        <option value="" disabled {{ old('status', $appointment->status) ? '' : 'selected' }}>Select Status</option>
+                        @foreach ($status as $option)
+                            <option value="{{ $option }}"
+                                {{ old('status', $appointment->status) === $option ? 'selected' : '' }}
+                            >
+                                {{ $option }}
+                            </option>
+                        @endforeach
+                    </x-forms.select>
+                </div>
             </div>
-        </div>
+        @endif
 
         {{-- Row: Remarks --}}
         <div class="flex flex-col md:flex-row items-start gap-2 md:gap-8 max-w-6xl w-full">

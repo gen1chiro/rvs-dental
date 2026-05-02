@@ -48,7 +48,7 @@
         </x-ui.button>
     </div>
 
-    <x-forms.container action="{{ route('appointments.medical-form.store', $appointment) }}" method="POST" id="medical-form" class="flex flex-col gap-4 w-full md:w-2/3 p-4 md:p-8 font-mono">
+    <x-forms.container action="{{ route('appointments.medical-form.store', $appointment) }}" method="POST" id="medical-form" class="flex flex-col gap-4 w-full md:w-2/3 p-4 md:p-8 font-mono" data-is-female="{{ $isFemale ? '1' : '0' }}">
             @if ($errors->any())
                 <div class="bg-red-50 border border-red-200 rounded p-3">
                     <p class="text-red-500 text-sm">Please fill in all required inputs</p>
@@ -82,38 +82,40 @@
             </section>
 
             <section data-step="3" class="form-step hidden space-y-4">
-                <div class="flex flex-col gap-3">
-                    <p class="font-bold text-sm md:text-base">10. For Women Only</p>
+                @if ($isFemale)
+                    <div class="flex flex-col gap-3">
+                        <p class="font-bold text-sm md:text-base">10. For Women Only</p>
 
-                    @foreach ($womenOnlyQuestions as $question)
-                        @php
-                            $questionId = (int) $question->question_id;
-                            $answer = $resolveAnswer($questionId);
-                            $questionText = preg_replace('/^For women only:\s*/i', '', $question->question);
-                        @endphp
-                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-                            <p class="text-sm">{{ $questionText }}</p>
-                            <div class="flex flex-wrap items-center gap-4 md:shrink-0">
-                                @foreach (['Yes', 'No', 'N/A'] as $option)
-                                    <label class="inline-flex items-center gap-2 text-sm cursor-pointer">
-                                        <input
-                                            type="radio"
-                                            name="responses[{{ $questionId }}][answer]"
-                                            value="{{ $option }}"
-                                            class="h-4 w-4 accent-primary"
-                                            @checked($answer === $option)
-                                        >
-                                        <span>{{ $option }}</span>
-                                    </label>
-                                @endforeach
+                        @foreach ($womenOnlyQuestions as $question)
+                            @php
+                                $questionId = (int) $question->question_id;
+                                $answer = $resolveAnswer($questionId);
+                                $questionText = preg_replace('/^For women only:\s*/i', '', $question->question);
+                            @endphp
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+                                <p class="text-sm">{{ $questionText }}</p>
+                                <div class="flex flex-wrap items-center gap-4 md:shrink-0">
+                                    @foreach (['Yes', 'No', 'N/A'] as $option)
+                                        <label class="inline-flex items-center gap-2 text-sm cursor-pointer">
+                                            <input
+                                                type="radio"
+                                                name="responses[{{ $questionId }}][answer]"
+                                                value="{{ $option }}"
+                                                class="h-4 w-4 accent-primary"
+                                                @checked($answer === $option)
+                                            >
+                                            <span>{{ $option }}</span>
+                                        </label>
+                                    @endforeach
+                                </div>
                             </div>
-                        </div>
 
-                        @error("responses.{$questionId}.answer")
-                            <p class="text-red-500 text-sm">{{ $message }}</p>
-                        @enderror
-                    @endforeach
-                </div>
+                            @error("responses.{$questionId}.answer")
+                                <p class="text-red-500 text-sm">{{ $message }}</p>
+                            @enderror
+                        @endforeach
+                    </div>
+                @endif
 
                 @foreach ($stepThree as $question)
                     @include('pages.appointments.partials.medical-question', [

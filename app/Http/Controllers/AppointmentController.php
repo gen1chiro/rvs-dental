@@ -139,6 +139,9 @@ class AppointmentController extends Controller
 
     public function medicalForm(Appointment $appointment): View
     {
+        $appointment->loadMissing('patient');
+        $isFemale = strtolower((string) $appointment->patient?->sex) === 'female';
+
         $questions = MedicalQuestion::query()
             ->select('question_id', 'question')
             ->orderBy('question_id')
@@ -163,6 +166,7 @@ class AppointmentController extends Controller
 
         return view('pages.appointments.medical-form', compact(
             'appointment',
+            'isFemale',
             'questions',
             'conditions',
             'existingResponses',
@@ -177,6 +181,9 @@ class AppointmentController extends Controller
         $womenOnly = [10, 11, 12];
         $radioWithNotes = [2, 3, 4, 5, 8];
         $textOnly = [9, 13, 14];
+        $bloodTypeOptions = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-', 'Unknown'];
+        $appointment->loadMissing('patient');
+        $isFemale = strtolower((string) $appointment->patient?->sex) === 'female';
         $otherConditionId = (int) MedicalCondition::query()
             ->where('condition_name', 'Others')
             ->value('id');
@@ -200,9 +207,11 @@ class AppointmentController extends Controller
             $rules["responses.{$questionId}.notes"] = ['nullable', 'string'];
         }
 
-        foreach ($womenOnly as $questionId) {
-            $rules["responses.{$questionId}.answer"] = ['required', 'in:Yes,No,N/A'];
-            $rules["responses.{$questionId}.notes"] = ['nullable', 'string'];
+        if ($isFemale) {
+            foreach ($womenOnly as $questionId) {
+                $rules["responses.{$questionId}.answer"] = ['required', 'in:Yes,No,N/A'];
+                $rules["responses.{$questionId}.notes"] = ['nullable', 'string'];
+            }
         }
 
         foreach ($radioWithNotes as $questionId) {
@@ -219,6 +228,8 @@ class AppointmentController extends Controller
             $rules["responses.{$questionId}.answer"] = ['nullable', 'in:Yes,No,N/A'];
         }
 
+        $rules['responses.13.notes'] = ['required', 'in:' . implode(',', $bloodTypeOptions)];
+
         $validated = $request->validate($rules, $messages);
 
         $selectedConditions = collect($validated['conditions'] ?? [])
@@ -234,7 +245,12 @@ class AppointmentController extends Controller
 
         $otherConditionNotes = trim((string) ($validated['other_condition_notes'] ?? $request->input('other_condition_notes', '')));
 
-        $questionIds = array_merge($radioOnly, $womenOnly, $radioWithNotes, $textOnly);
+        $questionIds = array_merge(
+            $radioOnly,
+            $radioWithNotes,
+            $textOnly,
+            $isFemale ? $womenOnly : []
+        );
 
         DB::transaction(function () use ($appointment, $validated, $questionIds, $textOnly, $selectedConditions, $otherConditionId, $otherConditionNotes) {
             foreach ($questionIds as $questionId) {
